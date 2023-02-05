@@ -1,5 +1,13 @@
 class FindBin {
 
+  our $Bin : ro string;
+  our $Script : ro string;
+  our $RealBin : ro string;
+  our $RealScript : ro string;
+  
+  INIT {
+    
+  }
 }
 
 =pod
