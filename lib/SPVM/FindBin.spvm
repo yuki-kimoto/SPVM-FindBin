@@ -38,8 +38,6 @@ class FindBin {
     
     my $script = CommandInfo->PROGRAM_NAME;
     
-    warn $script;
-    
     unless (Sys::FileTest->f($script)) {
       die "Cannot find current script \"$script\"";
     }
