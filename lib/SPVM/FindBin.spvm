@@ -1,12 +1,76 @@
 class FindBin {
-
+  use Sys;
+  use Sys::IO;
+  use Sys::IO::Stat;
+  use Sys::FileTest;
+  use Cwd;
+  use File::Spec;
+  use File::Basename;
+  
   our $Bin : ro string;
   our $Script : ro string;
   our $RealBin : ro string;
   our $RealScript : ro string;
   
   INIT {
+    &init();
+  }
+  
+  static method readlinkp : string ($file : string) {
+    my $link_stat = Sys::IO::Stat->new;
+    Sys::IO::Stat->lstat($file, $link_stat);
+    my $link_text_length = (int)$link_stat->st_size;
     
+    my $link_text = (mutable string)new_string_len $link_text_length;
+    Sys::IO->readlink($file, $link_text, $link_text_length);
+    
+    return $link_text;
+  }
+  
+  static method init : void () {
+    
+    my $script = CommandInfo->PROGRAM_NAME;
+    
+    unless (Sys::FileTest->f($script)) {
+      die("Cannot find current script '$script'") ;
+    }
+    
+    my $spec = File::Spec->new;
+    
+    unless ($spec->file_name_is_absolute($script)) {
+      $script = $spec->catfile([Cwd->getcwd], $script);
+    }
+    
+    my $fbn = File::Basename->new;
+    my $fbn_ret = $fbn->fileparse($script);
+    $Script = $fbn_ret->[0];
+    $Bin = $fbn_ret->[1];
+    
+    my $is_win = Sys->defined("_WIN32");
+    unless ($is_win) {
+      while (1) {
+        my $link_text = &readlinkp($script);
+        
+        my $fbn_ret = $fbn->fileparse($script);
+        $RealScript = $fbn_ret->[0];
+        $RealBin = $fbn_ret->[1];
+        
+        unless ($link_text) {
+          last;
+        }
+        
+        if ($spec->file_name_is_absolute($link_text)) {
+          $script = $link_text;
+        }
+        else {
+          $script = $spec->catfile([$RealBin], $link_text);
+        }
+      }
+    }
+    
+    $Bin = Cwd->abs_path($Bin);
+    
+    $RealBin = Cwd->abs_path($RealBin);
   }
 }
 
@@ -155,14 +219,14 @@ sub init
      # Resolve $script if it is a link
      while(1)
       {
-       my $linktext = readlink($script);
+       my $link_text = readlink($script);
 
        ($RealScript,$RealBin) = fileparse($script);
-       last unless defined $linktext;
+       last unless defined $link_text;
 
-       $script = (File::Spec->file_name_is_absolute($linktext))
-                  ? $linktext
-                  : File::Spec->catfile($RealBin, $linktext);
+       $script = (File::Spec->file_name_is_absolute($link_text))
+                  ? $link_text
+                  : File::Spec->catfile($RealBin, $link_text);
       }
 
      # Get absolute paths to directories
