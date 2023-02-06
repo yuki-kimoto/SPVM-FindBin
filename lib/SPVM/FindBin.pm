@@ -6,31 +6,58 @@ our $VERSION = '0.01';
 
 =head1 Name
 
-SPVM::FindBin - Short Description
+SPVM::FindBin - Locate Directory of Original Program
 
 =head1 Description
 
 C<SPVM::FindBin> is the C<FindBin> class in L<SPVM> language.
 
+Locates the full path to the script bin directory to allow the use of paths relative to the bin directory.
+
 =head1 Usage
 
   use FindBin;
   
-=head1 Fields
+  my $Bin = FindBin->Bin;
+  my $Script = FindBin->Script;
+  my $RealBin = FindBin->RealBin;
+  my $RealScript = FindBin->RealScript;
 
+=head1 Class Variables
 
+=head2 Bin
 
-=head1 Class Methods
+  our $Bin : ro string;
 
+The path to bin directory from where script was invoked.
 
+=head2 Script
 
-=head1 Instance Methods
+  our $Script : ro string;
 
+The basename of script from which perl was invoked
 
+=head2 RealBin
+
+  our $RealBin : ro string;
+
+L</"Bin"> with all links resolved
+
+=head2 RealScript
+
+  our $RealScript : ro string;
+
+L</"Script"> with all links resolved
 
 =head1 Repository
 
+L<SPVM::FindBin - Github|https://github.com/yuki-kimoto/SPVM-FindBin>
 
+=head1 See Also
+
+=head2 FindBin
+
+C<SPVM::FindBin> is the Perl's L<FindBin> porting to L<SPVM>.
 
 =head1 Author
 
