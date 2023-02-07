@@ -49,25 +49,22 @@ class FindBin {
     $Script = $fbn_ret->[0];
     $Bin = $fbn_ret->[1];
     
-    my $is_win = Sys->defined("_WIN32");
-    unless ($is_win) {
-      while (1) {
-        my $link_text = &readlinkp($script);
-        
-        my $fbn_ret = $fbn->fileparse($script);
-        $RealScript = $fbn_ret->[0];
-        $RealBin = $fbn_ret->[1];
-        
-        unless ($link_text) {
-          last;
-        }
-        
-        if ($spec->file_name_is_absolute($link_text)) {
-          $script = $link_text;
-        }
-        else {
-          $script = $spec->catfile([$RealBin], $link_text);
-        }
+    while (1) {
+      my $link_text = &readlinkp($script);
+      
+      my $fbn_ret = $fbn->fileparse($script);
+      $RealScript = $fbn_ret->[0];
+      $RealBin = $fbn_ret->[1];
+      
+      unless ($link_text) {
+        last;
+      }
+      
+      if ($spec->file_name_is_absolute($link_text)) {
+        $script = $link_text;
+      }
+      else {
+        $script = $spec->catfile([$RealBin], $link_text);
       }
     }
     
