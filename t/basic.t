@@ -22,4 +22,11 @@ is(SPVM::FindBin->Script, "$FindBin::Script");
 is(SPVM::FindBin->RealBin, "$FindBin::RealBin");
 is(SPVM::FindBin->RealScript, "$FindBin::RealScript");
 
+SPVM::FindBin->again;
+
+is(SPVM::FindBin->Bin, "$FindBin::Bin");
+is(SPVM::FindBin->Script, "$FindBin::Script");
+is(SPVM::FindBin->RealBin, "$FindBin::RealBin");
+is(SPVM::FindBin->RealScript, "$FindBin::RealScript");
+
 done_testing;

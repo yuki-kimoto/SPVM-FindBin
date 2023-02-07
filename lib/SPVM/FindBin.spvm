@@ -72,4 +72,8 @@ class FindBin {
     
     $RealBin = Cwd->abs_path($RealBin);
   }
+
+  static method again : void () {
+    &init();
+  }
 }

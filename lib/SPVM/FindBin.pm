@@ -53,9 +53,17 @@ L</"Script"> with all links resolved
 
 =head1 Class Methods
 
+=head2 init
+
   static method init : void ();
 
 Initializes the L<$Bin/"Bin">, L<$Script/"Script">, L<$RealBin/"RealBin">, L<$RealScript/"RealScript"> class variables.
+
+=head2 again
+
+  static method again : void ();
+
+The same as L</"init">.
 
 =head1 Repository
 
