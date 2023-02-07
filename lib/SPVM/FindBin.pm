@@ -18,6 +18,8 @@ Locates the full path to the script bin directory to allow the use of paths rela
 
   use FindBin;
   
+  FindBin->init;
+  
   my $Bin = FindBin->Bin;
   my $Script = FindBin->Script;
   my $RealBin = FindBin->RealBin;
@@ -48,6 +50,12 @@ L</"Bin"> with all links resolved
   our $RealScript : ro string;
 
 L</"Script"> with all links resolved
+
+=head1 Class Methods
+
+  static method init : void ();
+
+Initializes the L<$Bin/"Bin">, L<$Script/"Script">, L<$RealBin/"RealBin">, L<$RealScript/"RealScript"> class variables.
 
 =head1 Repository
 

@@ -12,9 +12,10 @@ use SPVM 'FindBin';
 
 use SPVM 'TestCase::FindBin';
 
-ok(SPVM::TestCase::FindBin->test);
+# init
+SPVM::FindBin->init;
 
-# SPVM::Cwd->abs_path("foo");
+ok(SPVM::TestCase::FindBin->test);
 
 is(SPVM::FindBin->Bin, "$FindBin::Bin");
 is(SPVM::FindBin->Script, "$FindBin::Script");
