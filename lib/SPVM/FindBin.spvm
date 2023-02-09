@@ -38,10 +38,8 @@ class FindBin {
       die "Cannot find current script \"$script\"";
     }
     
-    my $spec = File::Spec->new;
-    
-    unless ($spec->file_name_is_absolute($script)) {
-      $script = $spec->catfile([Cwd->getcwd], $script);
+    unless (File::Spec->file_name_is_absolute($script)) {
+      $script = File::Spec->catfile([Cwd->getcwd], $script);
     }
     
     my $fbn = File::Basename->new;
@@ -60,11 +58,11 @@ class FindBin {
         last;
       }
       
-      if ($spec->file_name_is_absolute($link_text)) {
+      if (File::Spec->file_name_is_absolute($link_text)) {
         $script = $link_text;
       }
       else {
-        $script = $spec->catfile([$RealBin], $link_text);
+        $script = File::Spec->catfile([$RealBin], $link_text);
       }
     }
     
