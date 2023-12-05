@@ -18,7 +18,7 @@ unless ($meta) {
   # Do something such as environment check.
 }
 
-my %configure_and_runtime_requires = ('SPVM' => '0.9689');
+my %configure_and_runtime_requires = ('SPVM' => '0.989063');
 WriteMakefile(
   NAME              => 'SPVM::FindBin',
   VERSION_FROM      => 'lib/SPVM/FindBin.pm',

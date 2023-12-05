@@ -1,6 +1,6 @@
 package SPVM::FindBin;
 
-our $VERSION = "0.004";
+our $VERSION = "0.031";
 
 1;
 
