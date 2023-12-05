@@ -13,6 +13,10 @@ class FindBin {
   our $RealBin : ro string;
   our $RealScript : ro string;
   
+  INIT {
+    &init();
+  }
+  
   private static method readlinkp : string ($file : string) {
     my $stat = Sys::IO::Stat->new;
     
