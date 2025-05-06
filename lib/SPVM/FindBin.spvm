@@ -3,7 +3,7 @@
 
 class FindBin {
   
-  version "0.033";
+  version "0.034";
   
   use Sys;
   use Cwd;
