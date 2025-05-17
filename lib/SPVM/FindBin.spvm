@@ -5,7 +5,6 @@ class FindBin {
   
   version "0.034";
   
-  use Sys;
   use File::Spec;
   use File::Basename;
   use Fn;
