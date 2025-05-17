@@ -6,7 +6,6 @@ class FindBin {
   version "0.034";
   
   use Sys;
-  use Cwd;
   use File::Spec;
   use File::Basename;
   use Fn;
@@ -22,18 +21,12 @@ class FindBin {
     
     my $program_name = CommandInfo->PROGRAM_NAME;
     
-    unless (Sys->f($program_name)) {
-      die "The program \"$program_name\" is not find.";
-    }
-    
     unless (File::Spec->file_name_is_absolute($program_name)) {
-      $program_name = File::Spec->catfile([Cwd->getcwd, $program_name]);
+      $program_name = File::Spec->rel2abs($program_name);
     }
     
-    my $fileparse_ret = File::Basename->fileparse($program_name);
-    $Script = $fileparse_ret->[0];
-    $Bin = $fileparse_ret->[1];
-    $Bin = Cwd->abs_path($Bin);
+    $Bin = File::Basename->dirname($program_name);
+    $Script = File::Basename->basename($program_name);
     
     Fn->destroy_runtime_permanent_vars;
   }

@@ -29,13 +29,13 @@ Locates the full path to the script bin directory to allow the use of paths rela
 
   our $Bin : ro string;
 
-The path to bin directory from where script was invoked.
+The absolute path of the directory where the program was invoked.
 
 =head2 Script
 
   our $Script : ro string;
 
-The basename of script from which perl was invoked
+The base name of the program name.
 
 =head1 Class Methods
 
