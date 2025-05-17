@@ -3,7 +3,7 @@
 
 class FindBin {
   
-  version "0.034";
+  version "0.035";
   
   use Sys;
   use File::Spec;
