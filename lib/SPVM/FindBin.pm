@@ -27,6 +27,10 @@ C<our $Bin : ro string;>
 
 The absolute path of the directory where the program was invoked.
 
+Note:
+
+In Windows, every path separator C<\> in the path is replaced with C</>.
+
 =head2 Script
 
 C<our $Script : ro string;>
