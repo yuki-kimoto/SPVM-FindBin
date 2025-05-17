@@ -22,8 +22,6 @@ Locates the full path to the script bin directory to allow the use of paths rela
   
   my $Bin = FindBin->Bin;
   my $Script = FindBin->Script;
-  my $RealBin = FindBin->RealBin;
-  my $RealScript = FindBin->RealScript;
 
 =head1 Class Variables
 
@@ -39,25 +37,13 @@ The path to bin directory from where script was invoked.
 
 The basename of script from which perl was invoked
 
-=head2 RealBin
-
-  our $RealBin : ro string;
-
-L</"Bin"> with all links resolved
-
-=head2 RealScript
-
-  our $RealScript : ro string;
-
-L</"Script"> with all links resolved
-
 =head1 Class Methods
 
 =head2 init
 
   static method init : void ();
 
-Initializes the L<$Bin/"Bin">, L<$Script/"Script">, L<$RealBin/"RealBin">, L<$RealScript/"RealScript"> class variables.
+Initializes the L<$Bin/"Bin">, L<$Script/"Script"> class variables.
 
 =head2 again
 
