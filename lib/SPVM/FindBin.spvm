@@ -26,6 +26,10 @@ class FindBin {
     }
     
     $Bin = File::Basename->dirname($program_name);
+    if (Sys::OS->is_windows) {
+      Fn->replace_chars((mutable string)$Bin, '\\', '/');
+    }
+    
     $Script = File::Basename->basename($program_name);
     
     Fn->destroy_runtime_permanent_vars;
